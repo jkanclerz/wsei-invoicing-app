@@ -1,3 +1,10 @@
 :host {
     display: table-row;
 }
+
+.suggestions {
+    position: absolute;
+    z-index: 100;
+    border: 1px solid black;
+    background: rgba(255, 255, 255, 0.9)
+}

@@ -2,7 +2,12 @@
   {{lp}}
 </th>
 <td>
-  <input class="form-control" type="text" name="name" [value]=position.name />
+  <input 
+    (input)=handleAutoSuggestions($event)
+    class="form-control" type="text" name="name" [value]=position.name />
+    <ul class="suggestions" *ngIf=showSuggestions>
+      <li *ngFor="let suggestion of suggestions">{{ suggestion.label }}</li>
+    </ul>
 </td>
 <td>
   <input class="form-control" type="number" name="quantity" [value]=position.quantity />
@@ -14,7 +19,14 @@
 </td>
 <td>
   <div class="input-group">
-    <input type="text" class="form-control" name="netto" [value]=position.netto />
+    <input
+      [(ngModel)]=position.netto
+      (change)=handleNettoChanged()
+      type="number" 
+      class="form-control"
+      name="netto" 
+      [value]=position.netto />
+    
     <div class="input-group-append">
       <span class="input-group-text">PLN</span>
     </div>
@@ -22,13 +34,19 @@
   
 </td>
 <td>
-    <select class="form-control" name="tax" [value]=position.tax>
+    <select
+      (change)=handleTaxChanged()
+      [(ngModel)]=position.tax
+      class="form-control" name="tax" [value]=position.tax>
         <option *ngFor="let t of availableTaxes" [value]=t>{{t}}</option>
     </select>
 </td>
 <td>
   <div class="input-group">
-    <input type="text" class="form-control" name="brutton" [value]=position.brutto />
+    <input 
+    (change)=handleBruttoChanged()
+    [(ngModel)]=position.brutto
+    type="number" class="form-control" name="brutton" [value]=position.brutto />
     <div class="input-group-append">
       <span class="input-group-text">PLN</span>
     </div>
